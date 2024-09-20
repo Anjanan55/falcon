@@ -6,6 +6,12 @@ import 'package:flutter_application_1/widgets/familydetails.dart';
 import 'package:flutter_application_1/widgets/politicans.dart';
 import 'package:flutter_application_1/widgets/commondropdown.dart';
 import 'package:flutter_application_1/widgets/commondropdownsearchable.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../controller/home_controller.dart';
+import 'basic_info_screen_bottom_sheet.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -237,6 +243,7 @@ class _ProfileFormState extends State<ProfileForm>
 
   String defaultReg = 'Hindu';
   List<String> religion = ['Hindu', 'Chirstian', 'Muslim', 'Athesit', 'Others'];
+  final HomeController controller = Get.put(HomeController());
 
   String defaultCaste = '1 Agaram';
   List<String> caste = [
@@ -710,165 +717,200 @@ class _ProfileFormState extends State<ProfileForm>
         body: TabBarView(
           controller: _tabController,
           children: [
-            _buildForm(
-              _basicFormKey,
+            Column(
+              children:
               [
-                commonDropDown(
-                  criminalCategory,
-                  defaultcat,
-                  "Criminial Category",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultcat = value!;
-                      },
+                ElevatedButton(
+                  onPressed: () {
+
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => DraggableBottomSheet(),
                     );
                   },
+                  child: Text('Choose Pic'),
                 ),
-                commonDropDown(
-                  criminalSubCategory,
-                  defaultSubCat,
-                  "Sub Category",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultSubCat = value!;
+                Row(children: [
+                  Text('Assign as Gang Leader'),Obx(()=>
+                     Checkbox(value:controller.gangleader.value, onChanged: (value){
+                      controller.toggle();
+                    }),
+                  )
+                ],),
+                Expanded(
+                  child: _buildForm(
+                  _basicFormKey,
+                  [
+                    commonDropDown(
+                      criminalCategory,
+                      defaultcat,
+                      "Criminial Category",
+                      (String? value) {
+                        setState(
+                          () {
+                            defaultcat = value!;
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
-                commonDropDown(
-                  typeOfCriminal,
-                  defaultTypeCri,
-                  "Sub Category",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultTypeCri = value!;
+                    ),
+                    commonDropDown(
+                      criminalSubCategory,
+                      defaultSubCat,
+                      "Sub Category",
+                      (String? value) {
+                        setState(
+                          () {
+                            defaultSubCat = value!;
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
-                TextFormField(
-                  controller: _controllers['name'],
-                  decoration: const InputDecoration(labelText: 'Name'),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter your name'
-                      : null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['name']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['aliasname'],
-                  decoration: const InputDecoration(labelText: 'Alias Name'),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter your Alias name'
-                      : null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['aliasname']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['reasonaliasname'],
-                  decoration:
-                      const InputDecoration(labelText: 'Reason for Aliasname'),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please Reason for Alias name'
-                      : null,
-                  onSaved: (value) => setState(
-                      () => _controllers['reasonaliasname']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['fathername'],
-                  decoration:
-                      const InputDecoration(labelText: 'Enter Father Name'),
-                  validator: (value) => null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['fathername']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['mothername'],
-                  decoration:
-                      const InputDecoration(labelText: 'Enter Mother Name'),
-                  validator: (value) => null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['mothername']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['dob'],
-                  decoration:
-                      const InputDecoration(labelText: 'Pick Date of Birth'),
-                  validator: (value) => null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['dob']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['age'],
-                  decoration: const InputDecoration(labelText: 'Age'),
-                  validator: (value) => null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['age']!.text = value!),
-                ),
-                TextFormField(
-                  controller: _controllers['phone'],
-                  decoration: InputDecoration(
-                      labelText: 'Phone',
-                      suffixIcon: InkWell(
-                          onTap: _showAddDialog, child: const Icon(Icons.add))),
-                  validator: (value) =>
-                      value == null || (value.isEmpty && phoneNumbers.isEmpty)
-                          ? 'Please enter your phone number'
+                    ),
+                    commonDropDown(
+                      typeOfCriminal,
+                      defaultTypeCri,
+                      "Sub Category",
+                      (String? value) {
+                        setState(
+                          () {
+                            defaultTypeCri = value!;
+                          },
+                        );
+                      },
+                    ),
+                    TextFormField(
+                      controller: _controllers['name'],
+                      decoration: const InputDecoration(labelText: 'Name'),
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Please enter your name'
                           : null,
-                  onSaved: (value) {
-                    if (value!.isNotEmpty) {
-                      setState(() => phoneNumbers.add(value));
-                    }
-                  },
-                ),
-                if (phoneNumbers.isNotEmpty) ...[
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: phoneNumbers.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      String phone = entry.value;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(phone, style: const TextStyle(fontSize: 16)),
-                          Row(
+                      onSaved: (value) =>
+                          setState(() => _controllers['name']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['aliasname'],
+                      decoration: const InputDecoration(labelText: 'Alias Name'),
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Please enter your Alias name'
+                          : null,
+                      onSaved: (value) =>
+                          setState(() => _controllers['aliasname']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['reasonaliasname'],
+                      decoration:
+                          const InputDecoration(labelText: 'Reason for Aliasname'),
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Please Reason for Alias name'
+                          : null,
+                      onSaved: (value) => setState(
+                          () => _controllers['reasonaliasname']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['fathername'],
+                      decoration:
+                          const InputDecoration(labelText: 'Enter Father Name'),
+                      validator: (value) => null,
+                      onSaved: (value) =>
+                          setState(() => _controllers['fathername']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['mothername'],
+                      decoration:
+                          const InputDecoration(labelText: 'Enter Mother Name'),
+                      validator: (value) => null,
+                      onSaved: (value) =>
+                          setState(() => _controllers['mothername']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['dob'],  // Use the controller from the map
+                      decoration: const InputDecoration(
+                        labelText: 'Pick Date of Birth',
+                      ),
+                      readOnly: true,  // Make it read-only so user can't type manually
+                      onTap: () async {
+                        await controller.pickDate(context);  // Pick date when field is tapped
+                        _controllers['dob']!.text = controller.dateController.text;  // Update with selected date
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select a date';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _controllers['dob']!.text = value!,
+                    ),
+                    TextFormField(
+                      controller: _controllers['age'],
+                      decoration: const InputDecoration(labelText: 'Age'),
+                      validator: (value) => null,
+                      onSaved: (value) =>
+                          setState(() => _controllers['age']!.text = value!),
+                    ),
+                    TextFormField(
+                      controller: _controllers['phone'],
+                      decoration: InputDecoration(
+                          labelText: 'Phone',
+                          suffixIcon: InkWell(
+                              onTap: _showAddDialog, child: const Icon(Icons.add))),
+                      validator: (value) =>
+                          value == null || (value.isEmpty && phoneNumbers.isEmpty)
+                              ? 'Please enter your phone number'
+                              : null,
+                      onSaved: (value) {
+                        if (value!.isNotEmpty) {
+                          setState(() => phoneNumbers.add(value));
+                        }
+                      },
+                    ),
+                    if (phoneNumbers.isNotEmpty) ...[
+                      const SizedBox(height: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: phoneNumbers.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          String phone = entry.value;
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.edit, color: Colors.blue),
-                                onPressed: () => _showEditDialog(index),
-                              ),
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.delete, color: Colors.red),
-                                onPressed: () => _removePhoneNumber(index),
+                              Text(phone, style: const TextStyle(fontSize: 16)),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon:
+                                        const Icon(Icons.edit, color: Colors.blue),
+                                    onPressed: () => _showEditDialog(index),
+                                  ),
+                                  IconButton(
+                                    icon:
+                                        const Icon(Icons.delete, color: Colors.red),
+                                    onPressed: () => _removePhoneNumber(index),
+                                  ),
+                                ],
                               ),
                             ],
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                  ),
-                ],
-                DropdownButtonFormField<String>(
-                  value: gender.isEmpty ? null : gender,
-                  decoration: const InputDecoration(labelText: 'Gender'),
-                  items: ['Male', 'Female', 'Other'].map((String value) {
-                    return DropdownMenuItem<String>(
-                        value: value, child: Text(value));
-                  }).toList(),
-                  onChanged: (value) => setState(() => gender = value!),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please select your gender'
-                      : null,
-                  onSaved: (value) => setState(() => gender = value!),
-                ),
-              ],
-              () => _submitForm(_basicFormKey, 1, 'Basic Info form submitted'),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                    DropdownButtonFormField<String>(
+                      value: gender.isEmpty ? null : gender,
+                      decoration: const InputDecoration(labelText: 'Gender'),
+                      items: ['Male', 'Female', 'Other'].map((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value, child: Text(value));
+                      }).toList(),
+                      onChanged: (value) => setState(() => gender = value!),
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Please select your gender'
+                          : null,
+                      onSaved: (value) => setState(() => gender = value!),
+                    ),
+                  ],
+                  () => _submitForm(_basicFormKey, 1, 'Basic Info form submitted'),
+                                ),
+                ),]
             ),
 
 //////////--------------Jurisdiction Form  Tab Start here-----------////////////
@@ -1020,7 +1062,7 @@ class _ProfileFormState extends State<ProfileForm>
               socialstatusFormKey,
               [
                 commonDropDownSearchable(
-                  religion,
+                  controller.religion,
                   defaultReg,
                   "Religion",
                   (String? value) {

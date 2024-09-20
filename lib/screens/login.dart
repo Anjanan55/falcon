@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home.dart';
+import 'package:get/get.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Login',
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        useMaterial3: true,
-      ),
-      home: const LoginPage(),
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Login',
+        theme: ThemeData(
+          primarySwatch: Colors.cyan,
+          useMaterial3: true,
+        ),
+        home: const LoginPage(),
     );
   }
 }

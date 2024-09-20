@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/assign_accuest_screen.dart';
+import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:flutter_application_1/widgets/commondropdownsearchable.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CaseForm extends StatefulWidget {
   const CaseForm({super.key});
@@ -216,6 +220,7 @@ class _CaseFormState extends State<CaseForm>
       ),
     );
   }
+  HomeController controller =Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -332,6 +337,24 @@ class _CaseFormState extends State<CaseForm>
                       setState(() => _controllers['year']!.text = value!),
                 ),
                 TextFormField(
+                  controller: _controllers['dateoofoccurence'],  // Use the controller from the map
+                  decoration: const InputDecoration(
+                    labelText: 'Date of Occurence',
+                  ),
+                  readOnly: true,  // Make it read-only so user can't type manually
+                  onTap: () async {
+                    await controller.pickDate(context);  // Pick date when field is tapped
+                    _controllers['dateoofoccurence']!.text = controller.dateController.text;  // Update with selected date
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a date';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) => _controllers['dob']!.text = value!,
+                ),
+                TextFormField(
                   controller: _controllers['sectionoflaw'],
                   decoration: const InputDecoration(labelText: 'sectionoflaw'),
                   validator: (value) => value == null || value.isEmpty
@@ -348,15 +371,9 @@ class _CaseFormState extends State<CaseForm>
             _buildForm(
               skillsFormKey,
               [
-                TextFormField(
-                  controller: _controllers['skills'],
-                  decoration: const InputDecoration(labelText: 'Skills'),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter your skills'
-                      : null,
-                  onSaved: (value) =>
-                      setState(() => _controllers['skills']!.text = value!),
-                ),
+                TextButton(onPressed: (){
+                  Get.to(HomePage());
+                }, child: Text('Assign Accuesed'))
               ],
               () => _submitForm(skillsFormKey, 2, 'Skills form submitted'),
             ),
