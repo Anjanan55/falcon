@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/home_controller.dart';
+import 'package:flutter_application_1/widgets/commondropdownsearchable.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,12 +45,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('People List')),
       body: Column(
         children: [
+
           Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
@@ -110,15 +116,15 @@ class _HomePageState extends State<HomePage> {
 
 class Person {
   String name;
-  int age;
-  String gender;
-  bool isPassed;
+  int? age;
+  String? gender;
+  bool? isPassed;
 
   Person({
     required this.name,
-    required this.age,
-    required this.gender,
-    required this.isPassed,
+    this.age,
+    this.gender,
+    this.isPassed,
   });
 }
 
@@ -144,9 +150,10 @@ class _PersonDetailFormState extends State<PersonDetailForm> {
     nameController = TextEditingController(text: widget.person.name);
     ageController = TextEditingController(text: widget.person.age.toString());
     genderController = TextEditingController(text: widget.person.gender);
-    isPassed = widget.person.isPassed;
+    isPassed = widget.person.isPassed!;
   }
 
+  final HomeController caseController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -158,18 +165,14 @@ class _PersonDetailFormState extends State<PersonDetailForm> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 16),
           TextField(
+            readOnly: true,
             controller: nameController,
             decoration: InputDecoration(labelText: 'Name'),
           ),
-          TextField(
-            controller: ageController,
-            decoration: InputDecoration(labelText: 'Age'),
-            keyboardType: TextInputType.number,
-          ),
-          TextField(
-            controller: genderController,
-            decoration: InputDecoration(labelText: 'Gender'),
-          ),
+        commonDropDownSearchable(caseController.courtcaseno, caseController.defaultcourtcaseno.value, 'Assign Court  Case No',
+                (value){
+                  caseController.defaultcourtcaseno.value = value!;
+                }),
           SizedBox(height: 16),
           Row(
             children: [
@@ -187,12 +190,26 @@ class _PersonDetailFormState extends State<PersonDetailForm> {
           SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
+              print(caseController.assignedcaseacc);
+              print(
+                  widget.onSave(Person(
+                    name: nameController.text,
+
+                  ))
+              );
               widget.onSave(Person(
                 name: nameController.text,
                 age: int.parse(ageController.text),
                 gender: genderController.text,
                 isPassed: isPassed,
               ));
+              print("+=====================");
+               caseController.assignedcaseacc.value = [({
+                 'name':nameController.text,
+
+
+               })];
+
             },
             child: Text('Save'),
           ),
