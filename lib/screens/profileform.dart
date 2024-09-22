@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
 // ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/widgets/concubine.dart';
@@ -15,6 +18,7 @@ import 'basic_info_screen_bottom_sheet.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
+
   @override
   State<ProfileForm> createState() => _ProfileFormState();
 }
@@ -80,8 +84,10 @@ class _ProfileFormState extends State<ProfileForm>
     'phone': TextEditingController(),
     'editPhone': TextEditingController(),
   };
+
   //To create list of array for concubinelist
   List<Map<String, String>> concubineList = [];
+
   void _addConcubine(Map<String, String> details) {
     setState(() {
       concubineList.add(details);
@@ -90,6 +96,7 @@ class _ProfileFormState extends State<ProfileForm>
 
   //To create list of array for family list
   List<Map<String, String>> familyList = [];
+
   void _addFamilyDetails(Map<String, String> details) {
     setState(() {
       familyList.add(details);
@@ -97,6 +104,7 @@ class _ProfileFormState extends State<ProfileForm>
   }
 
   List<Map<String, String>> politicalList = [];
+
   void _addpoliticalDetails(Map<String, String> details) {
     setState(() {
       politicalList.add(details);
@@ -104,6 +112,7 @@ class _ProfileFormState extends State<ProfileForm>
   }
 
   List<Map<String, String>> advocateList = [];
+
   // ignore: unused_element
   void _addadvocateDetails(Map<String, String> details) {
     setState(() {
@@ -113,6 +122,7 @@ class _ProfileFormState extends State<ProfileForm>
 
   String gender = '';
   List<String> phoneNumbers = [];
+
   // List<String> relationsShip = [];
   TabController? _tabController;
 
@@ -241,267 +251,9 @@ class _ProfileFormState extends State<ProfileForm>
     'Inactive'
   ];
 
-  String defaultReg = 'Hindu';
-  List<String> religion = ['Hindu', 'Chirstian', 'Muslim', 'Athesit', 'Others'];
+  // String defaultReg = 'Hindu';
+  // List<String> religion = ['Hindu', 'Chirstian', 'Muslim', 'Athesit', 'Others'];
   final HomeController controller = Get.put(HomeController());
-
-  String defaultCaste = '1 Agaram';
-  List<String> caste = [
-    '1 Agamudayar',
-    '1 Agaram',
-    '2 Alwar',
-    '2 Servai',
-    '2 Ansar',
-    '5 Arayar',
-    '5 Nulayar',
-    '6 Archakarai',
-    '7 Aryavathi',
-    '7 Ayira',
-    '10 Badagar',
-    '13 Billava',
-    '14 Bondil',
-    '16 Boyas',
-    '17 Chakkala',
-    '19 Chavalakarar',
-    '20 Chettu',
-    '20 Chowdry',
-    '22 Converts',
-    '23 C.S.I',
-    '25 Donga',
-    '26 Dekkani',
-    '27 Devangar',
-    '30 Dombs',
-    '32 Dudekula',
-    '33 Enadi',
-    '35 Ezhavathy',
-    '36 Ezhuthachar',
-    '37 Ezhuva(in',
-    '39 Gangavar',
-    '40 Gavara',
-    '41 Gounder',
-    '42 Gowda',
-    '43 Hegde',
-    '44 Idiga',
-    '45 IllathuPillaimar',
-    '50 Jhetty',
-    '51 Jogis',
-    '52 Kabbera',
-    '53 Kaikolar',
-    '54 Kaladi',
-    '56 Kalari',
-    '57 Kalingi',
-    '59 Kallar',
-    '59 Kallar',
-    '60 Kalveli',
-    '61 Kambar',
-    '62 Kammalar',
-    '63 Kani',
-    '63 Kaniyala',
-    '64 Kannada',
-    '64 Kannadiya',
-    '64 Karpoora',
-    '65 Karuneegar',
-    '65 Kasukkara',
-    '66 Katesar',
-    '67 Kavuthiyar',
-    '69 Kerala',
-    '70 Kharvi',
-    '71 Khatri',
-    '71 Kongu',
-    '73 Kongu',
-    '74 KoppalaVelama',
-    '77 Koteyar',
-    '78 Krishnanvaka',
-    '78 Kudikara',
-    '79 Kudumbi',
-    '79 Kuga',
-    '81 Kunchidigar',
-    '85 Labbais',
-    '86 Lambadi',
-    '87 Latin',
-    '88 Lingayat',
-    '89 Mahratta',
-    '91 Malayar',
-    '92 Male',
-    '93 Maniagar',
-    '94 Mapilla',
-    '95 Maravars',
-    '95 Moondrumandai',
-    '99 Mooppan',
-    '102 Muthuraja',
-    '104 Nadar',
-    '105 Nagaram',
-    '106 Naikkar',
-    '177 Nangudi',
-    '107 Nanjil',
-    '110 Odar',
-    '111 Odiya',
-    '111 Oottruvalanattu',
-    '111 O.P.S.',
-    '112 Ovachar',
-    '112 Paiyur',
-    '113 Pamulu',
-    '114 Panar',
-    '114 Panisaivan',
-    '114 ',
-    '114 Kathikarar',
-    '116 Pannirandam',
-    '118 Parkavakulam',
-    '119 Perike',
-    '120 Perumkollar',
-    '120 Podikara',
-    '120 Pooluva',
-    '122 Poraya',
-    '126 Pulavar',
-    '123 Pulluvar',
-    '124 Pusala',
-    '124 Reddy',
-    '125 Sadhu',
-    '126 Sakkaravar',
-    '130 Salivagana',
-    '131 Saliyar',
-    '134 Savalakkarar',
-    '135 Senaithalaivar',
-    '135 Sheik',
-    '136 Sourashtra',
-    '138 Sozhiavellalar',
-    '139 Srisayar',
-    '139 Sundaram',
-    '139 Syed',
-    '142 Thogatta',
-    '143 Tholkollar',
-    '144 Tholuva',
-    '144 Thoraiyar',
-    '146 Thoriyar',
-    '146 Ukkirakula',
-    '148 Uppara',
-    '150 Urali',
-    '150 Urikkara',
-    '153 Vallambar',
-    '154 Valmiki',
-    '155 Vaniyar',
-    '160 Veduvar',
-    '161 Veerasaiva',
-    '161 Velar',
-    '162 Vellan',
-    '163 Veluthodathu',
-    '166 Vokkaligar',
-    '167 Wynad',
-    '168 Yadhava',
-    '169 Yavana',
-    '170 Yerukula',
-    '172 Converts',
-    '172 Orphans',
-    '3 Ambalakarar',
-    '4 Andipandaram',
-    '11 Bestha',
-    '12 Bhatraju',
-    '16 Boyar',
-    '25 Dasari',
-    '30 Dommara',
-    '34 Eravallar',
-    '47 Isaivellalar',
-    '48 Jambuvanodai',
-    '49 Jangam',
-    '51 Jogi',
-    '72 Kongu',
-    '75 Koracha',
-    '80 Kulala',
-    '82 Kunnuvar',
-    '84 Kurumba',
-    '83 Kuruhini',
-    '96 & 56 Maruthuvar',
-    '168 Mond',
-    '100 Moundadan',
-    '90 Mahendra',
-    '103 Mutlakampatti',
-    '108 Narikoravar',
-    '109 Nokkar',
-    '157 Vanniakula',
-    '117 Paravar',
-    '97 Meenavar',
-    '101 Mukkuvar',
-    '165 Punnan',
-    '115 Pannayar',
-    '133 Sathatha',
-    '137 Sozhia',
-    '125 Telugupatty',
-    '147 Thottia',
-    '145 Thondaman',
-    '152 Valaiyar',
-    '156 Vannar',
-    '160 Vettaikarar',
-    '165 Vettuva',
-    '71 Yogeeswarar',
-    '8 Attur',
-    '9 Attur',
-    '95 Appanad',
-    '3 Ambalakarar',
-    '3 Ambalakkarar',
-    '16 Boyas',
-    '173 Battu',
-    '21 C.K.',
-    '17 Chakkala',
-    '18 Changyampudi',
-    '152 Chettinad',
-    '30 Dombs',
-    '28 Dobba',
-    '30 Dommars',
-    '16 Donga',
-    '31 Donga',
-    '174 Devagudi',
-    '29 Dobbai',
-    '24 Dabi',
-    '25 Donga',
-    '16 Gorrela',
-    '25 Gudu',
-    '38 Gandarvakottai',
-    '59 Gandarvakottai',
-    '46 Inji',
-    '51 Jogis',
-    '48 Jambavanodai',
-    '54 Kaladis',
-    '16 Kal',
-    '76 Koravars',
-    '58 Kalinji',
-    '59 Kootappal',
-    '55 Kala',
-    '16 Kalavathila',
-    '68 Kepmaris',
-    '95 Maravars',
-    '98 Monda',
-    '168 Monda',
-    '103 Mutlakampatti',
-    '109 Nokkars',
-    '16 Nellorepet',
-    '16 Oddars',
-    '16 Pedda',
-    '121 Ponnai',
-    '59 Piramalai',
-    '59 Peria',
-    '157 Padayachi',
-    '155 Punnan',
-    '155 Servai',
-    '128 Salem',
-    '229 Salem',
-    '127 Sakkaraithamadai',
-    '132 Saranga',
-    '16 Sooramari',
-    '95 Sembanad',
-    '140 Thalli',
-    '125 Telungapattti',
-    '147 Thottia',
-    '141 Thogamalai',
-    '149 Uppukoravars',
-    '150 Urali',
-    '159 Wayalpad',
-    '151 Vaduvarpatti',
-    '152 Valayars',
-    '160 Vettaikarar',
-    '164 Vetta',
-    '158 Varaganeri',
-    '165 Vettuva'
-  ];
 
   String defaultComm = 'BC';
   List<String> community = ['BC', 'MBC', 'DKV', 'SC PR', 'ST', 'Others'];
@@ -542,6 +294,7 @@ class _ProfileFormState extends State<ProfileForm>
     'Advocate',
     'Others'
   ];
+
   @override
   void initState() {
     super.initState();
@@ -713,37 +466,62 @@ class _ProfileFormState extends State<ProfileForm>
             ],
           ),
         ),
-  /// Basic Info //////////////////////////////////////////////////////////
+
+        /// Basic Info //////////////////////////////////////////////////////////
         body: TabBarView(
           controller: _tabController,
           children: [
-            Column(
-              children:
-              [
-                ElevatedButton(
-                  onPressed: () {
+            Column(children: [
+              Obx(
+                () => Container(
+                  height: 100,
+                  width: 100,
 
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => DraggableBottomSheet(),
-                    );
-                  },
-                  child: Text('Choose Pic'),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.zero,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white10,
+                        spreadRadius: 2,
+                        offset: Offset(0, 2)
+                      )
+                    ]
+                  ),
+                  child: controller.selectedImages.isNotEmpty
+                      ? Image.file(File(controller
+                          .selectedImages[0].path)) // Accessing the first image
+                      : const Icon(Icons.person), // Fallback if no image is selected
                 ),
-                Row(children: [
-                  Text('Assign as Gang Leader'),Obx(()=>
-                     Checkbox(value:controller.gangleader.value, onChanged: (value){
-                      controller.toggle();
-                    }),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => DraggableBottomSheet(),
+                  );
+                },
+                child: Text('Choose Pic'),
+              ),
+              Row(
+                children: [
+                  Text('Assign as Gang Leader'),
+                  Obx(
+                    () => Checkbox(
+                        value: controller.gangleader.value,
+                        onChanged: (value) {
+                          controller.toggle();
+                        }),
                   )
-                ],),
-                Expanded(
-                  child: _buildForm(
+                ],
+              ),
+              Expanded(
+                child: _buildForm(
                   _basicFormKey,
                   [
-                    commonDropDown(
+                    commonDropDownSearchable(
                       criminalCategory,
                       defaultcat,
                       "Criminial Category",
@@ -755,7 +533,7 @@ class _ProfileFormState extends State<ProfileForm>
                         );
                       },
                     ),
-                    commonDropDown(
+                    commonDropDownSearchable(
                       criminalSubCategory,
                       defaultSubCat,
                       "Sub Category",
@@ -767,7 +545,7 @@ class _ProfileFormState extends State<ProfileForm>
                         );
                       },
                     ),
-                    commonDropDown(
+                    commonDropDownSearchable(
                       typeOfCriminal,
                       defaultTypeCri,
                       "Sub Category",
@@ -779,28 +557,49 @@ class _ProfileFormState extends State<ProfileForm>
                         );
                       },
                     ),
+
                     TextFormField(
+
                       controller: _controllers['name'],
-                      decoration: const InputDecoration(labelText: 'Name'),
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        border: OutlineInputBorder(), // Add border here
+                        focusedBorder: OutlineInputBorder( // Border when the field is focused
+                          borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                        ),
+                        enabledBorder: OutlineInputBorder( // Border when the field is enabled but not focused
+                          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                      ),
                       validator: (value) => value == null || value.isEmpty
                           ? 'Please enter your name'
                           : null,
                       onSaved: (value) =>
                           setState(() => _controllers['name']!.text = value!),
                     ),
+                    SizedBox(height: 10,),
                     TextFormField(
                       controller: _controllers['aliasname'],
-                      decoration: const InputDecoration(labelText: 'Alias Name'),
+                      decoration: const InputDecoration(
+                        labelText: 'Alias Name',
+                        border: OutlineInputBorder(), // Add border here
+                        focusedBorder: OutlineInputBorder( // Border when the field is focused
+                          borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                        ),
+                        enabledBorder: OutlineInputBorder( // Border when the field is enabled but not focused
+                          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                      ),
                       validator: (value) => value == null || value.isEmpty
                           ? 'Please enter your Alias name'
                           : null,
-                      onSaved: (value) =>
-                          setState(() => _controllers['aliasname']!.text = value!),
+                      onSaved: (value) => setState(
+                          () => _controllers['aliasname']!.text = value!),
                     ),
                     TextFormField(
                       controller: _controllers['reasonaliasname'],
-                      decoration:
-                          const InputDecoration(labelText: 'Reason for Aliasname'),
+                      decoration: const InputDecoration(
+                          labelText: 'Reason for Aliasname'),
                       validator: (value) => value == null || value.isEmpty
                           ? 'Please Reason for Alias name'
                           : null,
@@ -812,26 +611,30 @@ class _ProfileFormState extends State<ProfileForm>
                       decoration:
                           const InputDecoration(labelText: 'Enter Father Name'),
                       validator: (value) => null,
-                      onSaved: (value) =>
-                          setState(() => _controllers['fathername']!.text = value!),
+                      onSaved: (value) => setState(
+                          () => _controllers['fathername']!.text = value!),
                     ),
                     TextFormField(
                       controller: _controllers['mothername'],
                       decoration:
                           const InputDecoration(labelText: 'Enter Mother Name'),
                       validator: (value) => null,
-                      onSaved: (value) =>
-                          setState(() => _controllers['mothername']!.text = value!),
+                      onSaved: (value) => setState(
+                          () => _controllers['mothername']!.text = value!),
                     ),
                     TextFormField(
-                      controller: _controllers['dob'],  // Use the controller from the map
+                      controller: _controllers['dob'],
+                      // Use the controller from the map
                       decoration: const InputDecoration(
                         labelText: 'Pick Date of Birth',
                       ),
-                      readOnly: true,  // Make it read-only so user can't type manually
+                      readOnly: true,
+                      // Make it read-only so user can't type manually
                       onTap: () async {
-                        await controller.pickDate(context);  // Pick date when field is tapped
-                        _controllers['dob']!.text = controller.dateController.text;  // Update with selected date
+                        await controller.pickDate(
+                            context); // Pick date when field is tapped
+                        _controllers['dob']!.text = controller
+                            .dateController.text; // Update with selected date
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -853,11 +656,12 @@ class _ProfileFormState extends State<ProfileForm>
                       decoration: InputDecoration(
                           labelText: 'Phone',
                           suffixIcon: InkWell(
-                              onTap: _showAddDialog, child: const Icon(Icons.add))),
-                      validator: (value) =>
-                          value == null || (value.isEmpty && phoneNumbers.isEmpty)
-                              ? 'Please enter your phone number'
-                              : null,
+                              onTap: _showAddDialog,
+                              child: const Icon(Icons.add))),
+                      validator: (value) => value == null ||
+                              (value.isEmpty && phoneNumbers.isEmpty)
+                          ? 'Please enter your phone number'
+                          : null,
                       onSaved: (value) {
                         if (value!.isNotEmpty) {
                           setState(() => phoneNumbers.add(value));
@@ -878,13 +682,13 @@ class _ProfileFormState extends State<ProfileForm>
                               Row(
                                 children: [
                                   IconButton(
-                                    icon:
-                                        const Icon(Icons.edit, color: Colors.blue),
+                                    icon: const Icon(Icons.edit,
+                                        color: Colors.blue),
                                     onPressed: () => _showEditDialog(index),
                                   ),
                                   IconButton(
-                                    icon:
-                                        const Icon(Icons.delete, color: Colors.red),
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.red),
                                     onPressed: () => _removePhoneNumber(index),
                                   ),
                                 ],
@@ -908,16 +712,17 @@ class _ProfileFormState extends State<ProfileForm>
                       onSaved: (value) => setState(() => gender = value!),
                     ),
                   ],
-                  () => _submitForm(_basicFormKey, 1, 'Basic Info form submitted'),
-                                ),
-                ),]
-            ),
+                  () => _submitForm(
+                      _basicFormKey, 1, 'Basic Info form submitted'),
+                ),
+              ),
+            ]),
 
 //////////--------------Jurisdiction Form  Tab Start here-----------////////////
             _buildForm(
               jurisdictionFormKey,
               [
-                commonDropDown(
+                commonDropDownSearchable(
                   zone,
                   defaultZone,
                   "Zone",
@@ -929,7 +734,7 @@ class _ProfileFormState extends State<ProfileForm>
                     );
                   },
                 ),
-                commonDropDown(
+                commonDropDownSearchable(
                   range,
                   defaultRange,
                   "Range",
@@ -1003,16 +808,46 @@ class _ProfileFormState extends State<ProfileForm>
                   onSaved: (value) => setState(
                       () => _controllers['presentpincode']!.text = value!),
                 ),
-                TextFormField(
-                  controller: _controllers['permanentdoorno'],
-                  decoration: const InputDecoration(
-                      labelText: 'Permanent Address door no'),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please Enter Address door no'
-                      : null,
-                  onSaved: (value) => setState(
-                      () => _controllers['permanentdoorno']!.text = value!),
+                Row(
+                  children: [
+                    const Text('Same Address',style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900
+                    ),),
+                    Obx(() => Checkbox(
+                      value: controller.address.value,
+                      onChanged: (value) {
+                        controller.address.value = value!;
+                        if (controller.address.value == true) {
+                          _controllers['permanentdoorno']?.text =
+                              _controllers['presentdoorno']!.text;
+                          _controllers['permanentline1']?.text =
+                              _controllers['presentline1']!.text;
+                          _controllers['permanentline2']?.text =
+                              _controllers['presentline2']!.text;
+                          _controllers['permanentvillage']?.text =
+                              _controllers['presentvillage']!.text;
+                          _controllers['permanentpincode']?.text =
+                              _controllers['presentpincode']!.text;
+                        } else {
+                          _controllers['permanentdoorno']?.clear();
+                          _controllers['permanentline1']?.clear();
+                          _controllers['permanentline2']?.clear();
+                          _controllers['permanentvillage']?.clear();
+                          _controllers['permanentpincode']?.clear();
+                        }
+                      }))],
                 ),
+                TextFormField(
+                        controller: _controllers['permanentdoorno'],
+                        decoration: const InputDecoration(
+                            labelText: 'Permanent Address door no'),
+                        validator: (value) => value == null || value.isEmpty
+                            ? 'Please Enter Address door no'
+                            : null,
+                        onSaved: (value) => setState(() =>
+                            _controllers['permanentdoorno']!.text = value!),
+                      ),
                 TextFormField(
                   controller: _controllers['permanentline1'],
                   decoration: const InputDecoration(
@@ -1058,97 +893,93 @@ class _ProfileFormState extends State<ProfileForm>
                   _submitForm(socialstatusFormKey, 3, 'Habits form submitted'),
             ),
 //////////-----------Social Status Form  Tab Start here----------////////////
-            _buildForm(
-              socialstatusFormKey,
-              [
-                commonDropDownSearchable(
-                  controller.religion,
-                  defaultReg,
-                  "Religion",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultReg = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  caste,
-                  defaultCaste,
-                  "Caste",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultCaste = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  community,
-                  defaultComm,
-                  "Community",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultComm = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  nationality,
-                  defaultNation,
-                  "Religion",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultNation = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  marital,
-                  defaultMarital,
-                  "Marital Status",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultMarital = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  education,
-                  defaultEdu,
-                  "Education Qualification",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultEdu = value!;
-                      },
-                    );
-                  },
-                ),
-                commonDropDownSearchable(
-                  profession,
-                  defaultProf,
-                  "Profession",
-                  (String? value) {
-                    setState(
-                      () {
-                        defaultProf = value!;
-                      },
-                    );
-                  },
-                ),
-              ],
-              () =>
-                  _submitForm(socialstatusFormKey, 3, 'Habits form submitted'),
+
+            Obx(
+              () => _buildForm(
+                socialstatusFormKey,
+                [
+                  commonDropDownSearchable(
+                    controller.religion,
+                    controller.defaultReg.value,
+                    "Religion",
+                    (String? value) {
+                      controller.defaultReg.value = value!;
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    controller.caste,
+                    controller.defaultCaste.value,
+                    "Caste",
+                    (String? value) {
+                      controller.defaultCaste.value = value!;
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    community,
+                    defaultComm,
+                    "Community",
+                    (String? value) {
+                      setState(
+                        () {
+                          defaultComm = value!;
+                        },
+                      );
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    nationality,
+                    defaultNation,
+                    "Religion",
+                    (String? value) {
+                      setState(
+                        () {
+                          defaultNation = value!;
+                        },
+                      );
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    marital,
+                    defaultMarital,
+                    "Marital Status",
+                    (String? value) {
+                      setState(
+                        () {
+                          defaultMarital = value!;
+                        },
+                      );
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    education,
+                    defaultEdu,
+                    "Education Qualification",
+                    (String? value) {
+                      setState(
+                        () {
+                          defaultEdu = value!;
+                        },
+                      );
+                    },
+                  ),
+                  commonDropDownSearchable(
+                    profession,
+                    defaultProf,
+                    "Profession",
+                    (String? value) {
+                      setState(
+                        () {
+                          defaultProf = value!;
+                        },
+                      );
+                    },
+                  ),
+                ],
+                () => _submitForm(
+                    socialstatusFormKey, 3, 'Habits form submitted'),
+              ),
             ),
+
 //////////------------Social Network Form  Tab Start here-----------////////////
             _buildForm(
               socialnetworkFormKey,

@@ -373,7 +373,19 @@ class _CaseFormState extends State<CaseForm>
               [
                 TextButton(onPressed: (){
                   Get.to(HomePage());
-                }, child: Text('Assign Accuesed'))
+                }, child: Text('Assign Accuesed')),
+        SizedBox(
+          height: 100,
+
+          child: Obx(()=>ListView.builder(
+              itemCount: controller.assignedcaseacc.length,
+              itemBuilder: (context,index)
+              { return   controller.assignedcaseacc.isEmpty?Text('no Data') :
+               Text(controller.assignedcaseacc[index]['name']);
+          
+          
+              }),),
+        )
               ],
               () => _submitForm(skillsFormKey, 2, 'Skills form submitted'),
             ),

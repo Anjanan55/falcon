@@ -37,6 +37,7 @@ dependencies:
   permission_handler:
   intl:
   shared_preferences: ^2.3.2
+  get_storage:
 
 dev_dependencies:
   flutter_test:
